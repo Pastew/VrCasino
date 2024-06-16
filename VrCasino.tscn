@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://ce6hs15tndixh"]
+
+[ext_resource type="Script" path="res://VrCasino.gd" id="1_8o8yu"]
+[ext_resource type="PackedScene" uid="uid://dvl383ispakmn" path="res://gui_panel_3d.tscn" id="2_uyf6v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ayjx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ikd2b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0ebhk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e7eet"]
+albedo_color = Color(0.722656, 0.791992, 1, 1)
+roughness = 0.0
+
+[node name="VrCasino" type="Node3D"]
+script = ExtResource("1_8o8yu")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="LeftController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_4ayjx")
+
+[node name="RightController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_4ayjx")
+
+[node name="GUIPanel3D" parent="." instance=ExtResource("2_uyf6v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.00397)
+
+[node name="Background" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.98389)
+
+[node name="Wall" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, -2.60819, 0.589247, -2.08943)
+mesh = SubResource("PlaneMesh_ikd2b")
+
+[node name="Wall2" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 5.08055, 0.589247, -2.08943)
+mesh = SubResource("PlaneMesh_ikd2b")
+
+[node name="Wall3" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(-1.74846e-07, -4, 0, -1.74846e-07, 7.64274e-15, -4, 4, -1.74846e-07, -1.74846e-07, 9.04446, 0.589247, 1.62058)
+mesh = SubResource("PlaneMesh_ikd2b")
+
+[node name="Floor" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -2.60819, -2.68765, 1.46502)
+mesh = SubResource("PlaneMesh_ikd2b")
+
+[node name="Floor2" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 5.08055, -2.68765, 1.46502)
+mesh = SubResource("PlaneMesh_ikd2b")
+
+[node name="Cube" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25901, -0.598608, 0.374871)
+mesh = SubResource("BoxMesh_0ebhk")
+surface_material_override/0 = SubResource("StandardMaterial3D_e7eet")
+
+[node name="Cube2" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88761, 2.01326, 0.374871)
+mesh = SubResource("BoxMesh_0ebhk")
+surface_material_override/0 = SubResource("StandardMaterial3D_e7eet")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Background/Cube2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.09059, 0, 8.36119)
+volume_db = 20.0
+emission_angle_enabled = true
+emission_angle_degrees = 17.0
+
+[node name="Cube3" type="MeshInstance3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62461, 1.46641, -0.69153)
+mesh = SubResource("BoxMesh_0ebhk")
+surface_material_override/0 = SubResource("StandardMaterial3D_e7eet")
